@@ -13,13 +13,19 @@ spec:
     metadata:
       labels:
         app: scaletestapp
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/metrics"
     spec:
       containers:
         - name: scaletestapp
-          image: ghcr.io/yandex-practicum/scaletestapp
+          image: ghcr.io/yandex-practicum/scaletestapp@sha256:7273dd1ffd1c1a29a307eb299b949f71828952b90dee42a5b26b052e92793452
           imagePullPolicy: IfNotPresent
           resources:
-            limits:
+            requests:
               memory: "30Mi"
+            limits:
+              memory: "128Mi"
           ports:
             - containerPort: 8080
